@@ -1,3 +1,11 @@
+/* --- AUDIO SFX SETUP --- */
+const clickAudio = new Audio('assets/click.mp3');
+
+function playClickSound() {
+    clickAudio.currentTime = 0;
+    clickAudio.play().catch(error => console.log("Audio waiting for interaction"));
+}
+
 /* --- DATABASE PRODUK & VARIAN --- */
 const productData = {
     'pubg': {
@@ -29,18 +37,16 @@ const productData = {
 
 /* --- MODAL LOGIC --- */
 function openVariantModal(productKey) {
+    playClickSound();
+    
     const modal = document.getElementById('variantModal');
     const title = document.getElementById('modalTitle');
     const grid = document.getElementById('variantGrid');
     const data = productData[productKey];
 
-    // Set Judul
     title.innerText = data.title;
-
-    // Reset Grid
     grid.innerHTML = '';
 
-    // Loop bikin tombol varian
     data.variants.forEach(variant => {
         const btn = document.createElement('div');
         btn.className = 'variant-btn';
@@ -48,20 +54,23 @@ function openVariantModal(productKey) {
             <span class="variant-name">${variant.name}</span>
             <span class="variant-price">$${variant.price}</span>
         `;
-        // Saat tombol varian diklik
-        btn.onclick = () => selectVariant(variant.name, variant.price);
+        
+        btn.onclick = () => {
+            playClickSound(); 
+            selectVariant(variant.name, variant.price);
+        };
+        
         grid.appendChild(btn);
     });
 
-    // Tampilkan Modal (Flex biar tengah)
     modal.style.display = 'flex';
 }
 
 function closeModal() {
+    playClickSound();
     document.getElementById('variantModal').style.display = 'none';
 }
 
-// Tutup modal kalau klik di luar kotak
 window.onclick = function(event) {
     const modal = document.getElementById('variantModal');
     if (event.target == modal) {
@@ -69,21 +78,24 @@ window.onclick = function(event) {
     }
 }
 
-/* --- SELECTION LOGIC --- */
+/* --- SELECTION LOGIC (INI YANG DIPERBAIKI) --- */
 function selectVariant(name, price) {
     // Isi Form
     document.getElementById('itemName').value = name;
-    document.getElementById('itemPrice').value = price;
+    
+    // PERBAIKAN: Tambahkan '$' di depan harga
+    document.getElementById('itemPrice').value = '$' + price; 
     
     // Tutup Modal
-    closeModal();
+    document.getElementById('variantModal').style.display = 'none';
     
     // Pindah ke section Pembayaran
     showSection('pembayaran');
 }
 
-/* --- NAVIGATION LOGIC (SAMA) --- */
+/* --- NAVIGATION LOGIC --- */
 function toggleNav() {
+    playClickSound();
     const sidebar = document.getElementById("mySidebar");
     const overlay = document.getElementById("overlay");
     sidebar.style.left = sidebar.style.left === "0px" ? "-280px" : "0px";
@@ -96,7 +108,7 @@ function showSection(sectionId) {
     window.scrollTo(0,0);
 }
 
-/* --- CRYPTO ADDRESS LOGIC (SAMA) --- */
+/* --- CRYPTO ADDRESS LOGIC --- */
 const wallets = {
     'BEP20': '0x1d72fab15514c6bb34d294d704b7cae4a76ba9c2',
     'TRC20': 'TYAEnA8BwpsdCDfdSxSaW7J5zUYMdWJFHF'
@@ -108,6 +120,7 @@ function updateAddress() {
     const codeElement = document.getElementById('cryptoAddress');
 
     if (network && wallets[network]) {
+        playClickSound();
         displayBox.style.display = 'block';
         codeElement.innerText = wallets[network];
         displayBox.style.animation = 'none';
@@ -119,14 +132,18 @@ function updateAddress() {
 }
 
 function copyAddress() {
+    playClickSound();
     const address = document.getElementById('cryptoAddress').innerText;
     navigator.clipboard.writeText(address).then(() => {
-        alert("Address Copied!");
+        const btn = document.querySelector('.copy-btn');
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => { btn.innerHTML = '<i class="far fa-copy"></i> Copy'; }, 2000);
     });
 }
 
-/* --- TELEGRAM LOGIC --- */
+/* --- TELEGRAM LOGIC (INI JUGA DIPERBAIKI) --- */
 function sendToTelegram() {
+    playClickSound();
     const item = document.getElementById('itemName').value;
     const price = document.getElementById('itemPrice').value;
     const network = document.getElementById('networkSelect').value;
@@ -136,20 +153,22 @@ function sendToTelegram() {
         return;
     }
 
+    // PERBAIKAN: Hapus tanda '$' manual di template, karena variable 'price' sudah membawanya
     const message = `
 🔴 *NEW ORDER REQUEST* 🔴
 --------------------------------
 📦 *Item:* ${item}
-💰 *Total:* $${price} (USDT)
+💰 *Total:* ${price} (USDT)
 🔗 *Network:* ${network}
 --------------------------------
 *Status:* Waiting for payment proof.
+👉 *USER ACTION:* I am ready to send the TXID/Screenshot now.
 `;
-    const telegramUsername = "seller_TIKTOKcoin";
+    const telegramUsername = "NEXUS_marketgame";
     window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
-/* --- TICKER (SAMA) --- */
+/* --- TICKER --- */
 const tickerData = [
     "USER_9928 just purchased PUBG 660 UC",
     "USER_akira_jp bought iTunes $50 Card",
@@ -168,14 +187,20 @@ function startTicker() {
     }
     tickerContainer.innerHTML = content;
 }
-document.addEventListener('DOMContentLoaded', startTicker);
-/* --- TAMBAHAN FIX SUPAYA TOMBOL HTML JALAN --- */
-// Fungsi ini menjembatani HTML lama dengan logika JS yang ada
+
+/* --- INIT --- */
+document.addEventListener('DOMContentLoaded', () => {
+    startTicker();
+
+    const clickableElements = document.querySelectorAll('button, .category-card, .nav-item, .menu-icon, .close-btn, .floating-cs');
+    clickableElements.forEach(element => {
+        element.addEventListener('click', playClickSound);
+    });
+});
+
+/* --- FUNGSI TAMBAHAN (Jaga-jaga buat tombol HTML manual) --- */
 function selectProduct(name, price) {
-    // Isi Form otomatis
     document.getElementById('itemName').value = name;
-    document.getElementById('itemPrice').value = price;
-    
-    // Pindah ke section Pembayaran
+    document.getElementById('itemPrice').value = '$' + price; // Tambah $ juga disini
     showSection('pembayaran');
 }
