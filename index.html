@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS GLOBAL | Premium Cyber Store</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="cyber-grid"></div>
+    <div class="scanlines"></div>
+
+    <div id="mySidebar" class="sidebar">
+        <div class="sidebar-header">
+            <a href="javascript:void(0)" class="close-btn" onclick="toggleNav()">&times;</a>
+            <div class="sidebar-logo">
+                <h2>NEXUS</h2>
+                <span class="blink_me">SYSTEM: ONLINE</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="#" onclick="showSection('home'); toggleNav()" class="nav-item">
+                <i class="fas fa-home"></i> BASE
+            </a>
+            <a href="#" onclick="showSection('produk'); toggleNav()" class="nav-item">
+                <i class="fas fa-boxes"></i> ARSENAL
+            </a>
+            <a href="#" onclick="showSection('pembayaran'); toggleNav()" class="nav-item">
+                <i class="fas fa-file-invoice-dollar"></i> CHECKOUT
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>LEGACY LINK:</p>
+            <a href="https://nexus-storev3.netlify.app" target="_blank" class="glitch-btn">
+                 <i class="fas fa-external-link-alt"></i> NEXUS INDONESIA V3
+            </a>
+        </div>
+    </div>
+
+    <header>
+        <div class="menu-icon" onclick="toggleNav()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logo">
+            <i class="fab fa-typo3" style="margin-right: 5px;"></i> NEXUS <span class="red-highlight">GLOBAL</span>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section id="home" class="section active">
+            <div class="hero-cyber">
+                <div class="hero-overlay"></div> <div class="hero-content">
+                    <h1 class="glitch-text">DOMINATE GLOBALLY</h1>
+                    <p class="subtitle">PREMIUM GAMING CREDITS // CRYPTO PAYMENTS</p>
+                    <div class="status-box">
+                        <span>SERVER: <span style="color: var(--neon-blue);">INTERNATIONAL</span></span>
+                        <span>SECURITY: <span style="color: #0f0;">ENCRYPTED</span></span>
+                    </div>
+                    <button class="cybr-btn" onclick="showSection('produk')">
+                        BROWSE CATALOG <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="produk" class="section">
+             <div class="category-header">
+                <i class="fas fa-crosshairs cat-icon-fa" style="color: #ffdd00;"></i>
+                <h3>PUBG MOBILE (GLOBAL CODE)</h3>
+            </div>
+            <div class="product-grid">
+                <div class="card" onclick="selectProduct('PUBG 60 UC', '0.83')">
+                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
+                    <div class="card-content"><h4>60 UC</h4><p class="price">$0.83</p></div>
+                </div>
+                <div class="card" onclick="selectProduct('PUBG 325 UC', '4.2')">
+                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
+                    <div class="card-content"><h4>325 UC</h4><p class="price">$4.2</p></div>
+                </div>
+                <div class="card" onclick="selectProduct('PUBG 660 UC', '8.2')">
+                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
+                    <div class="card-content"><h4>660 UC</h4><p class="price">$8.2</p></div>
+                </div>
+                <div class="card popular" onclick="selectProduct('PUBG 1800 UC', '20.3')">
+                    <span class="badge">POPULAR</span>
+                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
+                    <div class="card-content"><h4>1800 UC</h4><p class="price">$20.3</p></div>
+                </div>
+                <div class="card" onclick="selectProduct('PUBG 3850 UC', '40')">
+                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
+                    <div class="card-content"><h4>3850 UC</h4><p class="price">$40</p></div>
+                </div>
+                <div class="card" onclick="selectProduct('PUBG 8100 UC', '80')">
+                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
+                    <div class="card-content"><h4>8100 UC</h4><p class="price">$80</p></div>
+                </div>
+            </div>
+
+            <div class="category-header" style="margin-top: 40px;">
+                <i class="fab fa-ravelry cat-icon-fa" style="color: #0f0;"></i>
+                <h3 style="color: #0f0;">RAZER GOLD (GLOBAL/US)</h3>
+            </div>
+            <div class="product-grid">
+                <div class="card" style="border-color: #0f0;" onclick="selectProduct('Razer Gold $50', '40.5')">
+                    <i class="fas fa-ticket-alt card-icon-fa" style="color: #0f0;"></i>
+                    <div class="card-content"><h4>$50 PIN</h4><p class="price" style="color:#0f0;">$40.5</p></div>
+                </div>
+                <div class="card" style="border-color: #0f0;" onclick="selectProduct('Razer Gold $100', '81')">
+                    <i class="fas fa-ticket-alt card-icon-fa" style="color: #0f0;"></i>
+                    <div class="card-content"><h4>$100 PIN</h4><p class="price" style="color:#0f0;">$81</p></div>
+                </div>
+            </div>
+
+             <div class="category-header" style="margin-top: 40px;">
+                <i class="fab fa-apple cat-icon-fa" style="color: #ccc;"></i>
+                <h3 style="color: #ccc;">ITUNES US CARD</h3>
+            </div>
+            <div class="product-grid">
+                <div class="card" style="border-color: #ccc;" onclick="selectProduct('iTunes US $50', '36.5')">
+                    <i class="fab fa-apple card-icon-fa" style="color: #ccc;"></i>
+                    <div class="card-content"><h4>$50 CARD</h4><p class="price" style="color:#ccc;">$36.5</p></div>
+                </div>
+                <div class="card" style="border-color: #ccc;" onclick="selectProduct('iTunes US $100', '73')">
+                    <i class="fab fa-apple card-icon-fa" style="color: #ccc;"></i>
+                    <div class="card-content"><h4>$100 CARD</h4><p class="price" style="color:#ccc;">$73</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pembayaran" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-shield-alt"></i> SECURE CHECKOUT</h2>
+            </div>
+
+            <div class="payment-container">
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label>SELECTED ITEM</label>
+                        <input type="text" id="itemName" readonly placeholder="Please select item first">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>TOTAL TO PAY (USDT)</label>
+                        <div class="price-display">
+                             <i class="fas fa-coins"></i> <input type="text" id="itemPrice" readonly placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>SELECT NETWORK</label>
+                        <select id="networkSelect" onchange="updateAddress()">
+                            <option value="">-- CHOOSE NETWORK --</option>
+                            <option value="BEP20">USDT - BEP20 (BSC Network)</option>
+                            <option value="TRC20">USDT - TRC20 (Tron Network)</option>
+                        </select>
+                    </div>
+
+                    <div id="walletDisplay" class="wallet-box" style="display: none;">
+                        <p class="wallet-title">DEPOSIT ADDRESS:</p>
+                        <div class="address-container">
+                            <code id="cryptoAddress">...</code>
+                            <button type="button" onclick="copyAddress()" class="copy-btn"><i class="far fa-copy"></i></button>
+                        </div>
+                        <ul class="warning-list">
+                            <li>⚠️ Send only USDT to this address.</li>
+                            <li>⚠️ Ensure the network matches exactly.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <p>After clicking confirm, you will be redirected to Telegram to send the payment proof.</p>
+                    </div>
+
+                    <button type="button" class="cybr-btn full-width pay-btn" onclick="sendToTelegram()">
+                        CONFIRM & SEND PROOF <i class="fab fa-telegram-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="cyber-ticker">
+        <div class="ticker-wrap">
+            <div class="ticker-move" id="tickerContent">
+                </div>
+        </div>
+    </div>
+
+    <a href="https://t.me/seller_TIKTOKcoin" target="_blank" class="floating-cs">
+        <i class="fab fa-telegram-plane"></i>
+        <span class="cs-tooltip">Chat Admin</span>
+    </a>
+
+    <div id="overlay" onclick="toggleNav()"></div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+/* =========================================
+   NEXUS GLOBAL - FINAL STYLE SHEET
+   Theme: Cyberpunk / Dark / Neon
+   ========================================= */
+
+:root {
+    --bg-color: #020202;       /* Ultra Dark Black */
+    --card-bg: #0d0d0d;        /* Card Background */
+    --neon-red: #ff124f;       /* Main Accent (Red) */
+    --dark-red: #7a001e;       /* Darker Red for shadows */
+    --neon-blue: #00f3ff;      /* Secondary Accent (Cyan) */
+    --text-main: #e0e0e0;      /* Main Text Color */
+    
+    /* Fonts */
+    --font-head: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+}
+
+/* --- RESET & BASIC SETUP --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color); 
+    color: var(--text-main);
+    font-family: var(--font-body); 
+    overflow-x: hidden; 
+    min-height: 100vh;
+    padding-bottom: 60px; /* Space for Ticker at bottom */
+}
+
+/* --- CYBERPUNK BACKGROUND FX (PURE CSS) --- */
+.cyber-grid {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(255, 18, 79, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 18, 79, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px; 
+    z-index: -2;
+    perspective: 1000px; transform-style: preserve-3d;
+}
+
+.scanlines {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(transparent 0px, transparent 2px, rgba(0,0,0,0.3) 3px);
+    z-index: -1; pointer-events: none;
+}
+
+/* Animation Utility */
+.blink_me { animation: blinker 1.5s linear infinite; color: var(--neon-red); font-size: 0.8rem; font-weight: bold;}
+@keyframes blinker { 50% { opacity: 0; } }
+
+/* =========================================
+   HEADER & LOGO
+   ========================================= */
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 20px; 
+    background: rgba(2, 2, 2, 0.95);
+    border-bottom: 1px solid var(--neon-red);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 20px rgba(255, 18, 79, 0.2);
+}
+
+.menu-icon { font-size: 1.5rem; color: var(--neon-red); cursor: pointer; transition: 0.3s; }
+.menu-icon:hover { text-shadow: 0 0 10px var(--neon-red); transform: scale(1.1); }
+
+.logo { 
+    font-family: var(--font-head); 
+    font-size: 1.4rem; 
+    font-weight: 900; 
+    letter-spacing: 1px; 
+    display: flex; 
+    align-items: center; 
+    color: #fff;
+}
+.logo i { color: var(--neon-blue); margin-right: 8px; font-size: 1.6rem; }
+.red-highlight { color: var(--neon-red); margin-left: 5px; text-shadow: 0 0 10px var(--neon-red); }
+
+/* =========================================
+   SIDEBAR NAVIGATION (MENU GESER)
+   ========================================= */
+.sidebar {
+    height: 100%; width: 280px; 
+    position: fixed; top: 0; left: -280px;
+    background-color: #050505; 
+    border-right: 2px solid var(--neon-red);
+    padding-top: 10px; 
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Z-INDEX FIX: Must be higher than Ticker (9999) */
+    z-index: 10001; 
+    
+    display: flex; flex-direction: column;
+    box-shadow: 10px 0 50px rgba(0,0,0,0.9);
+}
+
+.sidebar-header { padding: 10px 20px 20px; border-bottom: 1px solid #222; text-align: center; }
+.close-btn { position: absolute; top: 10px; right: 15px; font-size: 30px; color: #666; text-decoration: none; transition: 0.3s; }
+.close-btn:hover { color: var(--neon-red); transform: rotate(90deg); }
+
+.sidebar-logo h2 { font-family: var(--font-head); color: #fff; letter-spacing: 3px; margin-top: 20px; }
+
+.sidebar-menu { flex-grow: 1; overflow-y: auto; padding-top: 20px; }
+
+.nav-item {
+    padding: 15px 20px; text-decoration: none; font-size: 1.1rem; color: #999;
+    display: flex; align-items: center; gap: 15px; transition: 0.3s;
+    font-family: var(--font-head); font-weight: 700; border-left: 3px solid transparent;
+}
+.nav-item i { width: 25px; text-align: center; }
+.nav-item:hover { 
+    color: var(--neon-red); 
+    background: rgba(255, 18, 79, 0.05); 
+    border-left: 3px solid var(--neon-red); 
+    padding-left: 25px;
+}
+
+.sidebar-footer { padding: 20px; border-top: 1px solid #222; background: #000; padding-bottom: 30px;}
+.sidebar-footer p { font-size: 0.7rem; color: #666; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Overlay for sidebar */
+#overlay { position: fixed; display: none; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.8); z-index: 900; }
+
+/* =========================================
+   SECTIONS & LAYOUT
+   ========================================= */
+.container { padding: 0 20px 40px; max-width: 900px; margin: 0 auto; }
+.section { display: none; animation: fadeIn 0.4s ease-out; }
+.section.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================
+   HERO SECTION (CSS ONLY BACKGROUND)
+   ========================================= */
+.hero-cyber {
+    position: relative;
+    /* Efek Horizon Digital tanpa gambar */
+    background: 
+        linear-gradient(to bottom, #020202 0%, transparent 80%, rgba(255, 18, 79, 0.2) 100%),
+        repeating-linear-gradient(90deg, transparent 0, transparent 40px, rgba(0, 243, 255, 0.05) 40px, rgba(0, 243, 255, 0.05) 41px),
+        linear-gradient(to top, #000 0%, #111 100%);
+    
+    padding: 80px 20px; text-align: center; 
+    border-bottom: 2px solid var(--neon-red); margin-bottom: 40px;
+    overflow: hidden;
+    margin-left: -20px; margin-right: -20px; /* Stretch Full Width */
+}
+
+/* Perspective Grid Overlay */
+.hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    transform: perspective(300px) rotateX(60deg) translateY(-50px) scale(2);
+    opacity: 0.4; pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; }
+
+.glitch-text {
+    font-family: var(--font-head); font-size: 2.2rem;
+    text-shadow: 3px 3px 0px var(--dark-red), -3px -3px 0px var(--neon-blue);
+    margin-bottom: 10px; letter-spacing: 2px;
+}
+.subtitle { letter-spacing: 2px; margin-bottom: 20px; font-size: 0.9rem; color: #aaa; }
+
+.status-box {
+    display: inline-flex; gap: 15px; background: #000; padding: 8px 15px;
+    border: 1px solid var(--neon-blue); font-family: monospace; font-size: 0.8rem; margin-bottom: 25px;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+/* =========================================
+   PRODUCT GRID & CARDS
+   ========================================= */
+.category-header {
+    display: flex; align-items: center; gap: 10px;
+    margin: 40px 0 20px; border-bottom: 2px solid #222; padding-bottom: 10px;
+}
+.cat-icon-fa { font-size: 1.5rem; filter: drop-shadow(0 0 5px currentColor); }
+.category-header h3 { font-family: var(--font-head); color: #fff; letter-spacing: 1px; font-size: 1.2rem; margin: 0; }
+
+.product-grid {
+    display: grid; 
+    /* Responsive Grid: Cards min-width 130px, max stretch */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+    gap: 15px;
+}
+
+.card {
+    background: var(--card-bg); 
+    border: 1px solid #333;
+    padding: 20px 10px;
+    text-align: center;
+    border-radius: 6px;
+    position: relative; cursor: pointer; transition: 0.3s;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+
+.card:hover {
+    border-color: var(--neon-red); 
+    box-shadow: 0 0 15px rgba(255, 18, 79, 0.2);
+    transform: translateY(-5px);
+}
+
+.card-icon-fa {
+    font-size: 2.5rem; margin-bottom: 15px; 
+    filter: drop-shadow(0 0 10px currentColor);
+    transition: 0.3s;
+}
+.card:hover .card-icon-fa { transform: scale(1.1); }
+
+.card h4 { font-size: 0.9rem; margin-bottom: 5px; color: #fff; font-weight: 700; font-family: var(--font-body); }
+.price { color: var(--neon-red); font-weight: 800; font-size: 1.1rem; font-family: var(--font-head); }
+
+.card.popular { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0, 243, 255, 0.1); }
+.badge {
+    position: absolute; top: 0; right: 0; background: var(--neon-blue); color: #000;
+    font-size: 0.6rem; padding: 2px 6px; font-weight: bold; font-family: var(--font-head);
+}
+
+/* =========================================
+   PAYMENT FORM
+   ========================================= */
+.section-header h2 { font-family: var(--font-head); color: var(--neon-blue); text-align: center; margin-bottom: 20px; }
+
+.payment-container { background: #080808; border: 1px solid #333; padding: 25px 20px; border-radius: 8px; }
+
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; color: #888; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; }
+
+.form-group input, .form-group select {
+    width: 100%; padding: 15px; background: #111; border: 1px solid #333;
+    color: #fff; font-family: var(--font-body); font-size: 1.1rem; border-radius: 4px;
+    transition: 0.3s;
+}
+.form-group input:focus, .form-group select:focus { 
+    outline: none; border-color: var(--neon-blue); 
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); 
+}
+
+.price-display { position: relative; }
+.price-display i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--neon-blue); }
+.price-display input { padding-left: 45px; color: var(--neon-blue); font-weight: 700; font-family: var(--font-head); letter-spacing: 1px;}
+
+/* Wallet Address Box */
+.wallet-box { 
+    background: rgba(0, 243, 255, 0.05); border: 1px solid var(--neon-blue); 
+    padding: 20px; border-radius: 4px; margin-bottom: 20px;
+    animation: fadeIn 0.5s;
+}
+.wallet-title { font-family: var(--font-head); color: var(--neon-blue); margin-bottom: 10px; font-size: 0.9rem; }
+.address-container { display: flex; background: #000; border: 1px dashed #444; padding: 5px; align-items: center;}
+.address-container code { flex-grow: 1; color: #fff; font-family: monospace; padding: 10px; overflow-wrap: break-word; font-size: 0.85rem; }
+.copy-btn { background: var(--neon-blue); border: none; padding: 10px 15px; font-weight: bold; cursor: pointer; color: #000; margin-left: 5px; transition: 0.2s;}
+.copy-btn:hover { background: #fff; }
+
+.warning-list { color: #ffaa00; font-size: 0.8rem; margin-top: 15px; padding-left: 20px; list-style-type: square;}
+.info-box { background: #111; padding: 15px; border-left: 3px solid #888; display: flex; gap: 10px; align-items: center; margin: 20px 0; font-size: 0.9rem; color: #ccc;}
+
+/* =========================================
+   BUTTONS (GLOBAL)
+   ========================================= */
+.cybr-btn {
+    background: var(--neon-red); color: #fff; border: none;
+    padding: 15px 25px; font-family: var(--font-head); font-weight: 700;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+    clip-path: polygon(5% 0, 100% 0, 100% 90%, 95% 100%, 0 100%, 0 10%);
+    transition: 0.2s; width: 100%; font-size: 1rem; margin-top: 10px;
+}
+.cybr-btn:hover { background: #ff4778; box-shadow: 0 0 25px var(--neon-red); transform: translateY(-2px);}
+
+.glitch-btn {
+    display: block; width: 100%; padding: 12px; border: 1px solid var(--neon-blue);
+    color: var(--neon-blue); text-decoration: none; font-weight: bold;
+    text-transform: uppercase; font-size: 0.9rem; transition: 0.2s;
+    background: rgba(0, 243, 255, 0.05); text-align: center;
+}
+.glitch-btn:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 15px var(--neon-blue); }
+
+/* =========================================
+   LIVE TICKER & FLOATING CS
+   ========================================= */
+.cyber-ticker {
+    position: fixed; bottom: 0; left: 0; width: 100%; height: 40px;
+    background: #000; border-top: 2px solid var(--neon-red);
+    z-index: 9999; /* Below Sidebar */
+    overflow: hidden; display: flex; align-items: center;
+}
+.ticker-wrap { width: 100%; overflow: hidden; white-space: nowrap; }
+.ticker-move {
+    display: inline-block; white-space: nowrap;
+    padding-left: 100%; animation: ticker 25s linear infinite;
+    font-family: var(--font-head); font-size: 0.8rem; color: var(--neon-red); text-transform: uppercase;
+}
+.ticker-item { display: inline-block; padding: 0 20px; }
+@keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+.floating-cs {
+    position: fixed; bottom: 60px; right: 20px;
+    width: 55px; height: 55px; background: #0088cc; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: white; font-size: 28px;
+    box-shadow: 0 0 15px rgba(0, 136, 204, 0.5); z-index: 2000; transition: 0.3s;
+}
+.floating-cs:hover { transform: scale(1.1); background: #00aaff; }
+.cs-tooltip {
+    position: absolute; right: 65px; background: #333; padding: 5px 10px;
+    border-radius: 4px; font-size: 0.8rem; opacity: 0; transition: 0.3s; pointer-events: none; white-space: nowrap; color: #fff;
+}
+.floating-cs:hover .cs-tooltip { opacity: 1; }
