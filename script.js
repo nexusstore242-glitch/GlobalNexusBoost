@@ -22,6 +22,7 @@ const productData = {
     'razer': {
         title: 'RAZER GOLD PIN',
         variants: [
+            { name: '$10 USD PIN', price: '8.1' }, /* Contoh tambah varian kecil */
             { name: '$50 USD PIN', price: '40.5' },
             { name: '$100 USD PIN', price: '81' }
         ]
@@ -29,6 +30,7 @@ const productData = {
     'itunes': {
         title: 'ITUNES US CARD',
         variants: [
+            { name: '$10 USD CARD', price: '7.3' }, /* Contoh tambah varian kecil */
             { name: '$50 USD CARD', price: '36.5' },
             { name: '$100 USD CARD', price: '73' }
         ]
@@ -40,11 +42,11 @@ function openVariantModal(productKey) {
     playClickSound();
     
     const modal = document.getElementById('variantModal');
-    const title = document.getElementById('modalTitle');
+    const titleElem = document.getElementById('modalTitle');
     const grid = document.getElementById('variantGrid');
     const data = productData[productKey];
 
-    title.innerText = data.title;
+    titleElem.innerText = data.title;
     grid.innerHTML = '';
 
     data.variants.forEach(variant => {
@@ -57,7 +59,8 @@ function openVariantModal(productKey) {
         
         btn.onclick = () => {
             playClickSound(); 
-            selectVariant(variant.name, variant.price);
+            // PERBAIKAN DISINI: Kita kirim Judul Game + Nama Varian
+            selectVariant(data.title, variant.name, variant.price);
         };
         
         grid.appendChild(btn);
@@ -78,18 +81,16 @@ window.onclick = function(event) {
     }
 }
 
-/* --- SELECTION LOGIC (INI YANG DIPERBAIKI) --- */
-function selectVariant(name, price) {
-    // Isi Form
-    document.getElementById('itemName').value = name;
-    
-    // PERBAIKAN: Tambahkan '$' di depan harga
+/* --- SELECTION LOGIC (LOGIKA PEMILIHAN BARU) --- */
+function selectVariant(gameTitle, variantName, price) {
+    // Gabungin Nama Game + Varian biar Resi Jelas
+    // Contoh Hasil: "PUBG MOBILE GLOBAL - 60 UC"
+    const fullName = `${gameTitle} - ${variantName}`;
+
+    document.getElementById('itemName').value = fullName;
     document.getElementById('itemPrice').value = '$' + price; 
     
-    // Tutup Modal
     document.getElementById('variantModal').style.display = 'none';
-    
-    // Pindah ke section Pembayaran
     showSection('pembayaran');
 }
 
@@ -141,7 +142,7 @@ function copyAddress() {
     });
 }
 
-/* --- TELEGRAM LOGIC (INI JUGA DIPERBAIKI) --- */
+/* --- TELEGRAM LOGIC --- */
 function sendToTelegram() {
     playClickSound();
     const item = document.getElementById('itemName').value;
@@ -153,16 +154,15 @@ function sendToTelegram() {
         return;
     }
 
-    // PERBAIKAN: Hapus tanda '$' manual di template, karena variable 'price' sudah membawanya
     const message = `
-🔴 *NEW ORDER REQUEST* 🔴
+🔴 NEW ORDER REQUEST 🔴
 --------------------------------
-📦 *Item:* ${item}
-💰 *Total:* ${price} (USDT)
-🔗 *Network:* ${network}
+📦 Item: ${item}
+💰 Total: ${price} (USDT)
+🔗 Network: ${network}
 --------------------------------
-*Status:* Waiting for payment proof.
-👉 *USER ACTION:* I am ready to send the TXID/Screenshot now.
+Status: Waiting for payment proof.
+👉 USER ACTION: I am ready to send the TXID/Screenshot now.
 `;
     const telegramUsername = "NEXUS_marketgame";
     window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
@@ -197,10 +197,3 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('click', playClickSound);
     });
 });
-
-/* --- FUNGSI TAMBAHAN (Jaga-jaga buat tombol HTML manual) --- */
-function selectProduct(name, price) {
-    document.getElementById('itemName').value = name;
-    document.getElementById('itemPrice').value = '$' + price; // Tambah $ juga disini
-    showSection('pembayaran');
-}
