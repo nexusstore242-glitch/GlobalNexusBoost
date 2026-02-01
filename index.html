@@ -49,8 +49,8 @@
         <div class="menu-icon" onclick="toggleNav()">
             <i class="fas fa-bars"></i>
         </div>
-        <div class="logo">
-            <i class="fab fa-typo3" style="margin-right: 5px;"></i> NEXUS <span class="red-highlight">GLOBAL</span>
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="NEXUS LOGO" class="main-logo">
         </div>
     </header>
 
@@ -58,80 +58,66 @@
         
         <section id="home" class="section active">
             <div class="hero-cyber">
-                <div class="hero-overlay"></div> <div class="hero-content">
-                    <h1 class="glitch-text">DOMINATE GLOBALLY</h1>
+                <div class="hero-content">
+                    <h1 class="glitch-text">BE PART OF THE LEGENDS</h1>
                     <p class="subtitle">PREMIUM GAMING CREDITS // CRYPTO PAYMENTS</p>
-                    <div class="status-box">
-                        <span>SERVER: <span style="color: var(--neon-blue);">INTERNATIONAL</span></span>
-                        <span>SECURITY: <span style="color: #0f0;">ENCRYPTED</span></span>
-                    </div>
+                    
                     <button class="cybr-btn" onclick="showSection('produk')">
                         BROWSE CATALOG <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
             </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-globe feature-icon"></i>
+                    <h3>GLOBAL ACCESS</h3>
+                    <p>Global access to the best digital goods.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lock feature-icon"></i>
+                    <h3>CRYPTO SECURE</h3>
+                    <p>We are crypto secure with encrypted lock.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3>INSTANT DELIVERY</h3>
+                    <p>Fast delivery, instant delivery.</p>
+                </div>
+            </div>
         </section>
 
         <section id="produk" class="section">
-             <div class="category-header">
-                <i class="fas fa-crosshairs cat-icon-fa" style="color: #ffdd00;"></i>
-                <h3>PUBG MOBILE (GLOBAL CODE)</h3>
+            <div class="section-header">
+                <h2><i class="fas fa-box"></i> SELECT CATEGORY</h2>
             </div>
-            <div class="product-grid">
-                <div class="card" onclick="selectProduct('PUBG 60 UC', '0.83')">
-                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
-                    <div class="card-content"><h4>60 UC</h4><p class="price">$0.83</p></div>
+            
+            <div class="product-grid main-categories">
+                <div class="card category-card" onclick="openVariantModal('pubg')">
+                    <i class="fas fa-crosshairs card-icon-fa" style="color: #ffdd00;"></i>
+                    <div class="card-content">
+                        <h4>PUBG MOBILE</h4>
+                        <p class="sub-text">GLOBAL CODE (UC)</p>
+                        <button class="select-btn">SELECT <i class="fas fa-arrow-right"></i></button>
+                    </div>
                 </div>
-                <div class="card" onclick="selectProduct('PUBG 325 UC', '4.2')">
-                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
-                    <div class="card-content"><h4>325 UC</h4><p class="price">$4.2</p></div>
-                </div>
-                <div class="card" onclick="selectProduct('PUBG 660 UC', '8.2')">
-                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
-                    <div class="card-content"><h4>660 UC</h4><p class="price">$8.2</p></div>
-                </div>
-                <div class="card popular" onclick="selectProduct('PUBG 1800 UC', '20.3')">
-                    <span class="badge">POPULAR</span>
-                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
-                    <div class="card-content"><h4>1800 UC</h4><p class="price">$20.3</p></div>
-                </div>
-                <div class="card" onclick="selectProduct('PUBG 3850 UC', '40')">
-                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
-                    <div class="card-content"><h4>3850 UC</h4><p class="price">$40</p></div>
-                </div>
-                <div class="card" onclick="selectProduct('PUBG 8100 UC', '80')">
-                    <i class="fas fa-box-open card-icon-fa" style="color: #ffdd00;"></i>
-                    <div class="card-content"><h4>8100 UC</h4><p class="price">$80</p></div>
-                </div>
-            </div>
 
-            <div class="category-header" style="margin-top: 40px;">
-                <i class="fab fa-ravelry cat-icon-fa" style="color: #0f0;"></i>
-                <h3 style="color: #0f0;">RAZER GOLD (GLOBAL/US)</h3>
-            </div>
-            <div class="product-grid">
-                <div class="card" style="border-color: #0f0;" onclick="selectProduct('Razer Gold $50', '40.5')">
-                    <i class="fas fa-ticket-alt card-icon-fa" style="color: #0f0;"></i>
-                    <div class="card-content"><h4>$50 PIN</h4><p class="price" style="color:#0f0;">$40.5</p></div>
+                <div class="card category-card" onclick="openVariantModal('razer')">
+                    <i class="fab fa-ravelry card-icon-fa" style="color: #0f0;"></i>
+                    <div class="card-content">
+                        <h4>RAZER GOLD</h4>
+                        <p class="sub-text">GLOBAL / US PIN</p>
+                        <button class="select-btn">SELECT <i class="fas fa-arrow-right"></i></button>
+                    </div>
                 </div>
-                <div class="card" style="border-color: #0f0;" onclick="selectProduct('Razer Gold $100', '81')">
-                    <i class="fas fa-ticket-alt card-icon-fa" style="color: #0f0;"></i>
-                    <div class="card-content"><h4>$100 PIN</h4><p class="price" style="color:#0f0;">$81</p></div>
-                </div>
-            </div>
 
-             <div class="category-header" style="margin-top: 40px;">
-                <i class="fab fa-apple cat-icon-fa" style="color: #ccc;"></i>
-                <h3 style="color: #ccc;">ITUNES US CARD</h3>
-            </div>
-            <div class="product-grid">
-                <div class="card" style="border-color: #ccc;" onclick="selectProduct('iTunes US $50', '36.5')">
+                <div class="card category-card" onclick="openVariantModal('itunes')">
                     <i class="fab fa-apple card-icon-fa" style="color: #ccc;"></i>
-                    <div class="card-content"><h4>$50 CARD</h4><p class="price" style="color:#ccc;">$36.5</p></div>
-                </div>
-                <div class="card" style="border-color: #ccc;" onclick="selectProduct('iTunes US $100', '73')">
-                    <i class="fab fa-apple card-icon-fa" style="color: #ccc;"></i>
-                    <div class="card-content"><h4>$100 CARD</h4><p class="price" style="color:#ccc;">$73</p></div>
+                    <div class="card-content">
+                        <h4>ITUNES CARD</h4>
+                        <p class="sub-text">US REGION ONLY</p>
+                        <button class="select-btn">SELECT <i class="fas fa-arrow-right"></i></button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -140,21 +126,18 @@
             <div class="section-header">
                 <h2><i class="fas fa-shield-alt"></i> SECURE CHECKOUT</h2>
             </div>
-
             <div class="payment-container">
                 <form id="orderForm">
                     <div class="form-group">
                         <label>SELECTED ITEM</label>
                         <input type="text" id="itemName" readonly placeholder="Please select item first">
                     </div>
-                    
                     <div class="form-group">
                         <label>TOTAL TO PAY (USDT)</label>
                         <div class="price-display">
                              <i class="fas fa-coins"></i> <input type="text" id="itemPrice" readonly placeholder="0.00">
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label>SELECT NETWORK</label>
                         <select id="networkSelect" onchange="updateAddress()">
@@ -163,24 +146,20 @@
                             <option value="TRC20">USDT - TRC20 (Tron Network)</option>
                         </select>
                     </div>
-
                     <div id="walletDisplay" class="wallet-box" style="display: none;">
                         <p class="wallet-title">DEPOSIT ADDRESS:</p>
                         <div class="address-container">
                             <code id="cryptoAddress">...</code>
-                            <button type="button" onclick="copyAddress()" class="copy-btn"><i class="far fa-copy"></i></button>
+                            <button type="button" onclick="copyAddress()" class="copy-btn"><i class="far fa-copy"></i> Copy</button>
                         </div>
                         <ul class="warning-list">
                             <li>⚠️ Send only USDT to this address.</li>
-                            <li>⚠️ Ensure the network matches exactly.</li>
                         </ul>
                     </div>
-                    
                     <div class="info-box">
                         <i class="fas fa-info-circle"></i>
                         <p>After clicking confirm, you will be redirected to Telegram to send the payment proof.</p>
                     </div>
-
                     <button type="button" class="cybr-btn full-width pay-btn" onclick="sendToTelegram()">
                         CONFIRM & SEND PROOF <i class="fab fa-telegram-plane"></i>
                     </button>
@@ -190,16 +169,23 @@
 
     </main>
 
+    <div id="variantModal" class="modal">
+        <div class="modal-content cyberpunk-box">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle">SELECT PACKAGE</h3>
+            <div id="variantGrid" class="variant-grid">
+                </div>
+        </div>
+    </div>
+
     <div class="cyber-ticker">
         <div class="ticker-wrap">
-            <div class="ticker-move" id="tickerContent">
-                </div>
+            <div class="ticker-move" id="tickerContent"></div>
         </div>
     </div>
 
     <a href="https://t.me/seller_TIKTOKcoin" target="_blank" class="floating-cs">
         <i class="fab fa-telegram-plane"></i>
-        <span class="cs-tooltip">Chat Admin</span>
     </a>
 
     <div id="overlay" onclick="toggleNav()"></div>
