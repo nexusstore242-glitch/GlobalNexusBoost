@@ -22,7 +22,6 @@ const productData = {
     'razer': {
         title: 'RAZER GOLD PIN',
         variants: [
-            { name: '$10 USD PIN', price: '8.1' },
             { name: '$50 USD PIN', price: '40.5' },
             { name: '$100 USD PIN', price: '81' }
         ]
@@ -30,7 +29,6 @@ const productData = {
     'itunes': {
         title: 'ITUNES US CARD',
         variants: [
-            { name: '$10 USD CARD', price: '7.3' },
             { name: '$50 USD CARD', price: '36.5' },
             { name: '$100 USD CARD', price: '73' }
         ]
@@ -39,9 +37,9 @@ const productData = {
     'roblox': {
         title: 'ROBLOX ROBUX',
         variants: [
-            { name: '10,000 ROBUX', price: '40' },
+            { name: '10,000 ROBUX', price: '45' },
             { name: '25,000 ROBUX', price: '100' },
-            { name: '48,000 ROBUX', price: '192' }
+            { name: '48,000 ROBUX', price: '195' }
         ]
     }
 };
@@ -173,7 +171,8 @@ function sendToTelegram() {
 Status: Waiting for payment proof.
 👉 USER ACTION: I am ready to send the TXID/Screenshot now.
 `;
-    const telegramUsername = "NEXUS_marketgame";
+    // TELEGRAM USERNAME UPDATED HERE
+    const telegramUsername = "nexus_GameMarket";
     window.open(`https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
